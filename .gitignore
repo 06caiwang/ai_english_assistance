@@ -53,4 +53,7 @@ logs/
 tmp/
 temp/
 tools/_shots/
+
+# ---------- 项目文档（方案/测试报告/截图，本地保留不上传）----------
+doc/
 doc/_ui.xml
