@@ -1,0 +1,56 @@
+# ---------- Android / Gradle ----------
+android-app/build/
+android-app/app/build/
+android-app/.gradle/
+android-app/.kotlin/
+android-app/local.properties
+android-app/captures/
+android-app/.externalNativeBuild/
+android-app/.cxx/
+*.apk
+*.aab
+*.iml
+.idea/
+.captures/
+.gradle/
+local.properties
+
+# ---------- Spring Boot ----------
+spring-server/target/
+*.class
+
+# ---------- Python ----------
+python-ai/.venv/
+python-ai/__pycache__/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# ---------- 密钥与本地环境（只提交 *.example）----------
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.p12
+doc/env.md
+secrets.properties
+
+# ---------- 智能体工作目录（含记忆与本地技能，不对外）----------
+.workbuddy/
+
+# ---------- 编辑器与系统 ----------
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 日志与临时文件 ----------
+*.log
+logs/
+tmp/
+temp/
+tools/_shots/
+doc/_ui.xml

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- ===== 主题 B：森系手账（设计令牌，见 doc/整改方案.md 10.0） ===== -->
+    <color name="cozy_bg">#FFFBF6EC</color>
+    <color name="cozy_card">#FFFFFDF8</color>
+    <color name="cozy_line">#FFE8DFC9</color>
+    <color name="cozy_green">#FF7BA05B</color>
+    <color name="cozy_green_light">#FFEAF3DF</color>
+    <color name="cozy_clay">#FFE8A87C</color>
+    <color name="cozy_text">#FF3E3226</color>
+    <color name="cozy_text_sub">#FF8A7A63</color>
+
+    <!-- 语义色 -->
+    <color name="danger">#FFC0563F</color>
+    <color name="coin_bg">#FFFFF1CF</color>
+
+    <!-- 兼容旧引用：一律映射到主题令牌，避免改布局文件时漏改 -->
+    <color name="bg">@color/cozy_bg</color>
+    <color name="primary">@color/cozy_green</color>
+    <color name="text_primary">@color/cozy_text</color>
+    <color name="text_secondary">@color/cozy_text_sub</color>
+    <color name="coin_text">#FF8A6A2F</color>
+</resources>

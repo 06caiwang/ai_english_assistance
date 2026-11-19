@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 9+ 默认禁止明文 HTTP，不配这个文件请求会一直转圈或被拒（CLEARTEXT not permitted）。
+  局域网 IP 会因为 DHCP 变化，逐条加白名单很麻烦，所以对本地演示放开明文；
+  正式上线应改成 HTTPS 并删掉 base-config。
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">10.210.125.29</domain>
+    </domain-config>
+</network-security-config>
