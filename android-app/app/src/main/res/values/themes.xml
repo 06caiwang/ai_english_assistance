@@ -42,6 +42,21 @@
 
     <style name="Theme.Aienglish" parent="Base.Theme.Aienglish" />
 
+    <!-- 页面标题：全站统一用书写体，字号/颜色只在这里改 -->
+    <style name="Widget.Cozy.Title" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/ma_shan_zheng</item>
+        <item name="android:textColor">@color/cozy_text</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- 卡片小标题 -->
+    <style name="Widget.Cozy.SectionTitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/cozy_text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Widget.Cozy.Button" parent="Widget.Material3.Button">
         <item name="cornerRadius">14dp</item>
         <item name="android:textSize">15sp</item>

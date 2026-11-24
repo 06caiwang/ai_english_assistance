@@ -30,6 +30,18 @@
             android:name=".ui.LearningActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.TranslateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.EssayGradeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.EssayGenerateActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.WordActivity"
             android:exported="false" />
         <activity

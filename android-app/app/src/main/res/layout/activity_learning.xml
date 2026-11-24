@@ -8,12 +8,10 @@
     android:padding="20dp">
 
     <TextView
+        style="@style/Widget.Cozy.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="学习"
-        android:textColor="@color/cozy_text"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="学习" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -66,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="今日 10 词"
+                    android:text="每天 10 词 · 三关记忆"
                     android:textColor="@color/cozy_text_sub"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -109,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="LangChain · Chain"
+                    android:text="查词 · 音标 · 例句"
                     android:textColor="@color/cozy_text_sub"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -159,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="LangGraph · 四步图"
+                    android:text="四维评分 · 修改建议"
                     android:textColor="@color/cozy_text_sub"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -202,10 +200,68 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="LangGraph · 生成图"
+                    android:text="按主题生成范文"
                     android:textColor="@color/cozy_text_sub"
                     android:textSize="11sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
+
+    <!-- 历史记录入口 -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardHistory"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🕘"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="历史记录"
+                    android:textColor="@color/cozy_text"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="查过的词 · 打过的分 · 写过的作文"
+                    android:textColor="@color/cozy_text_sub"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="›"
+                android:textColor="@color/cozy_text_sub"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 </LinearLayout>

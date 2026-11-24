@@ -16,5 +16,9 @@ public class Essay {
     private String content;
     private Integer score;
     private String comment;
+    /** 四维分数 JSON，历史详情用 */
+    private String dimsJson;
+    /** 扣分明细 JSON */
+    private String deductionsJson;
     private LocalDateTime createdAt;
 }

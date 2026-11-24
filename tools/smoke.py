@@ -190,6 +190,47 @@ def main():
         print(f"          -> {gen.get('wordCount')} 词，生词 {len(gen.get('keyWords') or [])} 个，"
               f"轨迹 {'->'.join(gen.get('trace') or [])}")
 
+    # ---------- 历史记录 ----------
+    # 同一个词再查一次，验证去重（历史里只应出现一条）
+    call("POST", "/api/ai/translate", {"text": "resilient"}, token=token)
+
+    st, r = call("GET", "/api/history/summary", token=token)
+    summ = r.get("data") or {}
+    check("GET /api/history/summary 三类计数",
+          r.get("code") == 0 and summ.get("translate", 0) >= 1
+          and summ.get("essay", 0) >= 1 and summ.get("generate", 0) >= 1, str(summ))
+
+    st, r = call("GET", "/api/history/translate?page=1&size=20", token=token)
+    page = r.get("data") or {}
+    items = page.get("items") or []
+    same = [i for i in items if i.get("text") == "resilient"]
+    check("GET /api/history/translate 有记录", r.get("code") == 0 and len(items) >= 1,
+          str(r)[:160])
+    check("同一个词重复查询只留一条（去重）", len(same) == 1, f"命中 {len(same)} 条")
+    check("历史单词带释义与时间",
+          bool(items[0].get("meaning")) and bool(items[0].get("createdAt")),
+          str(items[0])[:160] if items else "")
+
+    st, r = call("GET", "/api/history/essay?page=1&size=5", token=token)
+    page = r.get("data") or {}
+    items = page.get("items") or []
+    check("GET /api/history/essay 有分数与四维",
+          r.get("code") == 0 and items and items[0].get("score", 0) > 0
+          and bool(items[0].get("dimsJson")), str(items[0])[:160] if items else str(r)[:160])
+
+    st, r = call("GET", "/api/history/generate?page=1&size=5", token=token)
+    page = r.get("data") or {}
+    items = page.get("items") or []
+    check("GET /api/history/generate 有主题与字数",
+          r.get("code") == 0 and items and bool(items[0].get("topic"))
+          and items[0].get("wordCount", 0) > 0, str(items[0])[:160] if items else str(r)[:160])
+
+    st, r = call("GET", "/api/history/translate?page=1&size=999", token=token)
+    check("size 超上限自动收敛到 50", (r.get("data") or {}).get("size") == 50, str(r)[:120])
+
+    st, r = call("GET", "/api/history/translate")
+    check("历史接口无 token 返回 401", st == 401 or r.get("code") == 401, f"http={st}")
+
     # ---------- 统计 ----------
     st, r = call("GET", "/api/stats", token=token)
     check("GET /api/stats", r.get("code") == 0

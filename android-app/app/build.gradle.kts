@@ -19,7 +19,7 @@ android {
         // 模拟器访问本机后端固定用 10.0.2.2；真机改成电脑局域网 IP
 // 默认用局域网 IP（真机调试直接可用）；模拟器可覆盖：
         //   ./gradlew installDebug -PbaseUrl=http://10.0.2.2:8080/
-        val apiBase = (project.findProperty("baseUrl") as String?) ?: "http://10.210.125.29:8080/"
+        val apiBase = (project.findProperty("baseUrl") as String?) ?: "http://10.110.4.238:8080/"
         buildConfigField("String", "BASE_URL", "\"$apiBase\"")
     }
 

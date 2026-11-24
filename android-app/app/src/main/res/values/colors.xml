@@ -13,6 +13,10 @@
     <color name="cozy_text">#FF3E3226</color>
     <color name="cozy_text_sub">#FF8A7A63</color>
 
+    <!-- 便签纸 -->
+    <color name="note_paper">#FFFFFCF0</color>
+    <color name="note_tape">#CCE8D9B8</color>
+
     <!-- 语义色 -->
     <color name="danger">#FFC0563F</color>
     <color name="coin_bg">#FFFFF1CF</color>

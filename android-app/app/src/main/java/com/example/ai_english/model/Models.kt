@@ -146,6 +146,50 @@ data class StatsResp(
     val essayCount: Int = 0
 )
 
+// ---------- 历史记录 ----------
+
+data class HistorySummary(val translate: Int = 0, val essay: Int = 0, val generate: Int = 0)
+
+data class HistoryPage<T>(
+    val total: Int = 0,
+    val page: Int = 1,
+    val size: Int = 20,
+    val items: List<T>? = null
+)
+
+data class TranslateRecordItem(
+    val id: Long = 0,
+    val text: String = "",
+    val meaning: String = "",
+    val phonetic: String? = null,
+    val pos: String? = null,
+    val example: String? = null,
+    val source: String? = null,
+    val createdAt: String = ""
+)
+
+data class EssayRecordItem(
+    val id: Long = 0,
+    val content: String = "",
+    val score: Int = 0,
+    val comment: String? = null,
+    val dimsJson: String? = null,
+    val deductionsJson: String? = null,
+    val createdAt: String = ""
+)
+
+data class GenerateRecordItem(
+    val id: Long = 0,
+    val topic: String = "",
+    val essay: String = "",
+    val wordCount: Int = 0,
+    val genre: String? = null,
+    val level: String? = null,
+    val levelText: String? = null,
+    val keywordsJson: String? = null,
+    val createdAt: String = ""
+)
+
 // ---------- 请求体 ----------
 
 data class RegisterReq(val username: String, val password: String, val nickname: String?)

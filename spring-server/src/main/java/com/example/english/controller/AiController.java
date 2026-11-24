@@ -20,12 +20,12 @@ public class AiController {
 
     @PostMapping("/translate")
     public Result<Dtos.TranslateResp> translate(@Valid @RequestBody Dtos.TranslateReq req) {
-        return Result.ok(aiService.translate(req.text()));
+        return Result.ok(aiService.translate(UserContext.get(), req.text()));
     }
 
     @PostMapping("/essay/generate")
     public Result<Dtos.GenerateResp> generate(@Valid @RequestBody Dtos.GenerateReq req) {
-        return Result.ok(aiService.generate(req.topic(), req.genre(), req.targetWords(), req.level()));
+        return Result.ok(aiService.generate(UserContext.get(), req.topic(), req.genre(), req.targetWords(), req.level()));
     }
 
     @PostMapping("/essay")

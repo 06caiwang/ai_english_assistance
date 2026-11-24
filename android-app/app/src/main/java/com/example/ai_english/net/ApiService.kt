@@ -13,7 +13,12 @@ import com.example.ai_english.model.EssayReq
 import com.example.ai_english.model.EssayResp
 import com.example.ai_english.model.FeedReq
 import com.example.ai_english.model.FeedResp
+import com.example.ai_english.model.EssayRecordItem
 import com.example.ai_english.model.FoodItem
+import com.example.ai_english.model.GenerateRecordItem
+import com.example.ai_english.model.HistoryPage
+import com.example.ai_english.model.HistorySummary
+import com.example.ai_english.model.TranslateRecordItem
 import com.example.ai_english.model.GenerateReq
 import com.example.ai_english.model.GenerateResp
 import com.example.ai_english.model.LoginReq
@@ -91,6 +96,28 @@ interface ApiService {
 
     @POST("api/ai/essay/generate")
     suspend fun generateEssay(@Body req: GenerateReq): ApiResult<GenerateResp>
+
+    // ---------- 历史记录 ----------
+    @GET("api/history/summary")
+    suspend fun historySummary(): ApiResult<HistorySummary>
+
+    @GET("api/history/translate")
+    suspend fun historyTranslate(
+        @retrofit2.http.Query("page") page: Int = 1,
+        @retrofit2.http.Query("size") size: Int = 20
+    ): ApiResult<HistoryPage<TranslateRecordItem>>
+
+    @GET("api/history/essay")
+    suspend fun historyEssay(
+        @retrofit2.http.Query("page") page: Int = 1,
+        @retrofit2.http.Query("size") size: Int = 20
+    ): ApiResult<HistoryPage<EssayRecordItem>>
+
+    @GET("api/history/generate")
+    suspend fun historyGenerate(
+        @retrofit2.http.Query("page") page: Int = 1,
+        @retrofit2.http.Query("size") size: Int = 20
+    ): ApiResult<HistoryPage<GenerateRecordItem>>
 
     // ---------- 统计 ----------
     @GET("api/stats")

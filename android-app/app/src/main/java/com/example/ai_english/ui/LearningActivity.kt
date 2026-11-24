@@ -16,8 +16,9 @@ class LearningActivity : AppCompatActivity() {
         setContentView(b.root)
 
         b.cardWord.setOnClickListener { startActivity(Intent(this, WordActivity::class.java)) }
-        b.cardTranslate.setOnClickListener { AiDialogs.translate(this) }
-        b.cardGrade.setOnClickListener { AiDialogs.essay(this) }
-        b.cardGenerate.setOnClickListener { AiDialogs.generate(this) }
+        b.cardTranslate.setOnClickListener { startActivity(Intent(this, TranslateActivity::class.java)) }
+        b.cardGrade.setOnClickListener { startActivity(Intent(this, EssayGradeActivity::class.java)) }
+        b.cardGenerate.setOnClickListener { startActivity(Intent(this, EssayGenerateActivity::class.java)) }
+        b.cardHistory.setOnClickListener { startActivity(Intent(this, HistoryActivity::class.java)) }
     }
 }

@@ -4,6 +4,7 @@ import com.example.english.common.BizException;
 import com.example.english.dto.Dtos;
 import com.example.english.entity.Essay;
 import com.example.english.mapper.EssayMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,17 +26,23 @@ public class AiService {
 
     private final RestTemplate restTemplate;
     private final EssayMapper essayMapper;
+    private final HistoryService historyService;
+    private final ObjectMapper objectMapper;
     private final String baseUrl;
 
     public AiService(@Qualifier("aiRestTemplate") RestTemplate restTemplate,
                      EssayMapper essayMapper,
+                     HistoryService historyService,
+                     ObjectMapper objectMapper,
                      @Value("${app.ai.base-url}") String baseUrl) {
         this.restTemplate = restTemplate;
         this.essayMapper = essayMapper;
+        this.historyService = historyService;
+        this.objectMapper = objectMapper;
         this.baseUrl = baseUrl;
     }
 
-    public Dtos.TranslateResp translate(String text) {
+    public Dtos.TranslateResp translate(Long userId, String text) {
         Map<String, Object> body = new HashMap<>();
         body.put("text", text);
         try {
@@ -44,6 +51,8 @@ public class AiService {
             if (resp == null || resp.meaning() == null || resp.meaning().isBlank()) {
                 throw new BizException(5001, "AI 返回内容为空，请重试");
             }
+            // 只记成功结果；写历史失败不影响返回
+            historyService.saveTranslate(userId, text, resp);
             return resp;
         } catch (BizException e) {
             throw e;
@@ -53,7 +62,8 @@ public class AiService {
         }
     }
 
-    public Dtos.GenerateResp generate(String topic, String genre, Integer targetWords, String level) {
+    public Dtos.GenerateResp generate(Long userId, String topic, String genre,
+                                      Integer targetWords, String level) {
         Map<String, Object> body = new HashMap<>();
         body.put("topic", topic);
         body.put("genre", genre == null ? "narrative" : genre);
@@ -65,6 +75,11 @@ public class AiService {
             if (resp == null || resp.essay() == null || resp.essay().isBlank()) {
                 throw new BizException(5001, "AI 没有返回作文，请重试");
             }
+            historyService.saveGenerate(userId, topic,
+                    new Dtos.GenerateReq(topic, genre == null ? "narrative" : genre,
+                            targetWords == null ? 120 : targetWords,
+                            level == null ? "senior" : level),
+                    resp);
             return resp;
         } catch (BizException e) {
             throw e;
@@ -96,11 +111,23 @@ public class AiService {
             essay.setScore(resp.score());
             List<String> sugg = resp.suggestions();
             essay.setComment(sugg == null ? "" : String.join("；", sugg));
+            essay.setDimsJson(toJson(resp.dimensions()));
+            essay.setDeductionsJson(toJson(resp.deductions()));
             essay.setCreatedAt(LocalDateTime.now());
             essayMapper.insert(essay);
         } catch (Exception e) {
             log.warn("save essay failed: {}", e.toString());
         }
         return resp;
+    }
+
+    /** 序列化失败就存 null，历史页再做兜底展示 */
+    private String toJson(Object o) {
+        try {
+            return o == null ? null : objectMapper.writeValueAsString(o);
+        } catch (Exception e) {
+            log.warn("json serialize failed: {}", e.toString());
+            return null;
+        }
     }
 }

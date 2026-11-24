@@ -137,6 +137,27 @@ public final class Dtos {
     public record NicknameReq(@NotBlank(message = "昵称不能为空") @Size(max = 20, message = "昵称最多 20 字") String nickname) {
     }
 
+    // ---------- 历史记录 ----------
+    public record TranslateRecordItem(Long id, String text, String meaning, String phonetic,
+                                      String pos, String example, String source, String createdAt) {
+    }
+
+    public record EssayRecordItem(Long id, String content, int score, String comment,
+                                  String dimsJson, String deductionsJson, String createdAt) {
+    }
+
+    public record GenerateRecordItem(Long id, String topic, String essay, int wordCount,
+                                     String genre, String level, String levelText,
+                                     String keywordsJson, String createdAt) {
+    }
+
+    /** 分页外壳：页面暂时只做首屏，但协议先按分页定，后面不用改 */
+    public record HistoryPage<T>(int total, int page, int size, List<T> items) {
+    }
+
+    public record HistorySummary(int translate, int essay, int generate) {
+    }
+
     // ---------- 统计 ----------
     public record StatsResp(int learnedCount, double accuracy, int streakDays, int essayCount) {
     }

@@ -8,12 +8,10 @@
     android:padding="20dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="设置"
-        android:textColor="@color/cozy_text"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+            style="@style/Widget.Cozy.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -161,14 +159,6 @@
         android:text="已学 0 词 · 正确率 0% · 连续 0 天"
         android:textColor="@color/cozy_text"
         android:textSize="12sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="技术栈：Kotlin · Spring Boot · LangGraph · MySQL"
-        android:textColor="@color/cozy_text_sub"
-        android:textSize="11sp" />
 
     <Space
         android:layout_width="1dp"
